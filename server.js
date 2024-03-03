@@ -13,6 +13,10 @@ app.use(bodyParser.json());
 const userRoutes = require('./Router/userRoute');
 app.use('/users', userRoutes);
 
+//Hotel Routes
+const hotelRoutes = require('./Router/hotelsRoute');
+app.use('/hotels', hotelRoutes);
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () =>{
     console.log(`Server is running on PORT:${PORT}`);
