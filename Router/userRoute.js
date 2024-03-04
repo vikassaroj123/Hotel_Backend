@@ -67,16 +67,13 @@ router.put('/profile/password', jwtAuthMiddleware, async (req, res) => {
             return res.status(404).json({ error: 'User not found' });
         }
         const isPasswordValid = await bcrypt.compare(req.body.currentPassword, existingUser.password);
-
         if (!isPasswordValid) {
             return res.status(401).json({ error: 'Current password is incorrect' });
         }
         const hashedPassword = await bcrypt.hash(req.body.newPassword, 10);
-
         // Assuming you have a method called updatePassword in your User model
         existingUser.password = hashedPassword;
         const updatedUser = await existingUser.save();
-
         res.status(200).json({ message: 'Password updated successfully', user: updatedUser });
     } catch (err) {
         console.error('Error occurred at password update route.', err);

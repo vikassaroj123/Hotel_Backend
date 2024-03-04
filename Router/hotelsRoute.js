@@ -5,7 +5,7 @@ const { jwtAuthMiddleware } = require('../jwt');
 const { validationResult } = require('express-validator');
 
 // Hotel register
-router.post('/', jwtAuthMiddleware, async (req, res) => {
+router.post('/',  async (req, res) => {
     try {
         // Data validation
         const errors = validationResult(req);

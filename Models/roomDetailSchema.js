@@ -1,51 +1,53 @@
 const mongoose = require('mongoose');
 
 const roomHotelSchema = new mongoose.Schema({
-    name: {
+    roomNumber: {
         type: String,
-        required: true
+        required: true,
+        unique: true,
+        trim: true
     },
-    type: {
+    roomType: {
         type: String,
-        enum: ['Single', 'Double', 'Suite'], // Example room types, you can customize as needed
-        required: true
-    },
-    description: {
-        type: String,
-        required: true
+        required: true,
+        enum: ['Standard', 'Deluxe', 'Suite']
     },
     price: {
         type: Number,
-        required: true
+        required: true,
+        min: 0
     },
-    amenities: {
-        type: [String], // Array of strings representing amenities
-        default: []
-    },
-    capacity: {
-        type: Number,
-        required: true
-    },
-    bookedDates: {
-        type: [Date], // Array of dates when the room is booked
-        default: []
-    },
-    imageUrl: {
-        type: String
-    },
-    isActive: {
+    available: {
         type: Boolean,
         default: true
     },
-    created_at: {
-        type: Date,
-        default: Date.now
+    capacity: {
+        type: Number,
+        required: true,
+        min: 1
     },
-    updated_at: {
-        type: Date,
-        default: Date.now
+    floor: {
+        type: String,
+        required: true,
+        enum: ['Ground Floor', 'First Floor', 'Second Floor', 'Third Floor'] 
+    },
+    amenities: {
+        type: [String],
+        default: [],
+        validate: {
+            validator: function(amenities) {
+                // Custom validation to ensure all amenities are unique
+                return new Set(amenities).size === amenities.length;
+            },
+            message: props => `${props.value} contains duplicate amenities`
+        }
+    },
+    description: {
+        type: String,
+        default: ""
     }
 });
 
 const RoomHotel = mongoose.model('RoomHotel', roomHotelSchema);
+
 module.exports = RoomHotel;
