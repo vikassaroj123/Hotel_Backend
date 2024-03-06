@@ -21,6 +21,10 @@ app.use('/hotels', hotelRoutes);
 const roomRoutes = require('./Router/roomRoute');
 app.use('/hotels', roomRoutes);
 
+//Booking Routes
+const bookingRoutes = require('./Router/bookingRoutes');
+app.use('/booking', bookingRoutes)
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () =>{
     console.log(`Server is running on PORT:${PORT}`);

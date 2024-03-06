@@ -34,11 +34,11 @@ const userSchema = mongoose.Schema({
     },
     preferences: {
         type: [String],
-        default: [] 
+        default: []
     },
     bookings: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Booking'
+        ref: 'HotelBooking' // Adjusted model name
     }],
     createdAt: {
         type: Date,
@@ -50,11 +50,11 @@ const userSchema = mongoose.Schema({
     },
     isVerified: {
         type: Boolean,
-        default: false 
+        default: false
     },
-    verificationToken: String, 
-    resetPasswordToken: String, 
-    resetPasswordExpires: Date 
+    verificationToken: String,
+    resetPasswordToken: String,
+    resetPasswordExpires: Date
 });
 
 userSchema.methods.updatePassword = async function(newPassword) {
