@@ -1,34 +1,17 @@
 const mongoose = require('mongoose');
 
 const paymentSchemaHotelBooking = mongoose.Schema({
-    // Name of the cardholder
-    cardholderName: {
+    bookingId: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
-    // Card number (usually encrypted in production)
-    cardNumber: {
-        type: String,
-        required: true
-    },
-    // Expiry date of the card
-    cardExpiry: {
-        type: String,
-        required: true
-    },
-    // CVV/CVC security code
-    cardCvc: {
-        type: String,
-        required: true
-    },
-    // Billing address
-    billingAddress: {
-        type: String,
-        required: true
-    },
-    // Total amount paid
-    totalAmount: {
+    amount: {
         type: Number,
+        required: true
+    },
+    method: {
+        type: String,
         required: true
     },
     // Payment status (e.g., Paid, Pending, Failed)

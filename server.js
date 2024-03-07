@@ -26,9 +26,12 @@ const bookingRoutes = require('./Router/bookingRoutes');
 app.use('/booking', bookingRoutes);
 
 //Hotel serch and filter
-
 const hotelFilter = require('./Router/filterHotel');
 app.use('/hotels', hotelFilter);
+
+//Payment
+const paymentRoutes = require('./Router/paymentRoutes');
+app.use('/payments',paymentRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () =>{

@@ -28,10 +28,10 @@ const bookingHotelSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    isPaid: {
-        type: Boolean,
-        default: false
-    },
+    paymentIds: [{ 
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Payment'
+    }],
     createdAt: {
         type: Date,
         default: Date.now
